@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090908">
+  <meta name="color-scheme" content="dark">
+  <title>ONE | 面談予約</title>
+  <!--
+    ?v=4 を付けて、
+    GitHub Pages / スマホ側に古いCSSが
+    残りにくいようにしています。
+  -->
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+  <main class="booking">
+    <!-- ========================================
+         BRAND
+    ========================================= -->
+    <header class="brand">
+      <div class="brand-mark">
+        <span class="star">✦</span>
+        <h1>ONE</h1>
+        <span class="star">✦</span>
+      </div>
+      <p class="brand-sub">
+        LIVE STREAMER AGENCY
+      </p>
+    </header>
+    <!-- ========================================
+         STEP 01
+         面談種類
+    ========================================= -->
+    <section
+      class="step active"
+      id="step-type"
+    >
+      <div class="step-number">
+        01
+      </div>
+      <p class="eyebrow">
+        INTERVIEW BOOKING
+      </p>
+      <h2>
+        面談予約
+      </h2>
+      <p class="description">
+        面談の種類を選択してください
+      </p>
+      <div class="type-list">
+        <button class="type-card" data-type="所属前面談" type="button"><div><span class="card-number">01</span><h3>所属前面談 <small>15分</small></h3><p>ONEへの所属をご検討中の方</p></div><span class="arrow">→</span></button>
+        <button class="type-card" data-type="イラスト作成面談" type="button"><div><span class="card-number">02</span><h3>イラスト作成面談 <small>15分</small></h3><p>イラスト制作について相談したい方</p></div><span class="arrow">→</span></button>
+        <button class="type-card" data-type="初回面談" type="button"><div><span class="card-number">03</span><h3>初回面談 <small>30分</small></h3><p>所属が決定したライバーの方</p></div><span class="arrow">→</span></button>
+        <button class="type-card" data-type="継続面談" type="button"><div><span class="card-number">04</span><h3>継続面談 <small>30分</small></h3><p>活動の振り返りや今後について相談したい方</p></div><span class="arrow">→</span></button>
+      </div>
+      <!-- ========================================
+           予約済みの方
+      ========================================= -->
+      <div class="already-booked">
+        <div class="already-booked-line"></div>
+        <p class="already-booked-label">
+          ALREADY BOOKED
+        </p>
+        <button
+          class="already-booked-button"
+          id="open-booking-management"
+          type="button"
+        >
+          <div>
+            <span class="already-booked-title">
+              予約済みの方はこちら
+            </span>
+            <span class="already-booked-description">
+              予約の確認・キャンセル
+            </span>
+          </div>
+          <span class="already-booked-arrow">
+            →
+          </span>
+        </button>
+      </div>
+    </section>
+    <!-- ========================================
+         STEP 02
+         日付・時間
+    ========================================= -->
+    <section
+      class="step"
+      id="step-date"
+    >
+      <div class="step-number">
+        02
+      </div>
+      <p class="eyebrow">
+        SELECT DATE
+      </p>
+      <h2>
+        面談日を選択
+      </h2>
+      <p
+        class="selected-type-text"
+        id="selected-type-text"
+      ></p>
+      <p class="description">
+        予約可能な日付を選択してください
+      </p>
+      <!-- カレンダー -->
+      <div class="calendar">
+        <div class="calendar-header">
+          <button
+            id="prev-month"
+            type="button"
+            aria-label="前の月"
+          >
+            ←
+          </button>
+          <h3 id="calendar-title">
+          </h3>
+          <button
+            id="next-month"
+            type="button"
+            aria-label="次の月"
+          >
+            →
+          </button>
+        </div>
+        <div class="weekdays">
+          <span>日</span>
+          <span>月</span>
+          <span>火</span>
+          <span>水</span>
+          <span>木</span>
+          <span>金</span>
+          <span>土</span>
+        </div>
+        <div
+          id="calendar-days"
+          class="calendar-days"
+        ></div>
+      </div>
+      <!-- 空き時間 -->
+      <div
+        id="slot-area"
+        class="slot-area"
+      >
+        <p id="slot-date">
+        </p>
+        <div
+          id="time-slots"
+          class="time-slots"
+        ></div>
+      </div>
+      <!-- 読み込み状態 -->
+      <div
+        id="calendar-loading"
+        class="calendar-loading"
+        aria-live="polite"
+      >
+        <span class="mini-loader"></span>
+        <p
+          id="calendar-message"
+          class="calendar-message"
+        >
+          空き枠を読み込んでいます...
+        </p>
+      </div>
+      <button
+        class="back-button"
+        id="back-to-type"
+        type="button"
+      >
+        ← 面談種類の選択に戻る
+      </button>
+    </section>
+    <!-- ========================================
+         STEP 03
+         情報入力
+    ========================================= -->
+    <section
+      class="step"
+      id="step-info"
+    >
+      <div class="step-number">
+        03
+      </div>
+      <p class="eyebrow">
+        YOUR INFORMATION
+      </p>
+      <h2>
+        情報入力
+      </h2>
+      <p class="description">
+        面談に必要な情報をご入力ください
+      </p>
+      <!-- 選択内容 -->
+      <div class="booking-summary-mini">
+        <div>
+          <span>INTERVIEW</span>
+          <p id="info-type">―</p>
+        </div>
+        <div>
+          <span>DATE</span>
+          <p id="info-date">―</p>
+        </div>
+        <div>
+          <span>TIME</span>
+          <p id="info-time">―</p>
+        </div>
+      </div>
+      <!-- 入力フォーム -->
+      <div class="form-area">
+        <!-- 活動名 -->
+        <label class="form-field">
+          <span class="form-label">
+            活動名
+            <small>REQUIRED</small>
+          </span>
+          <input
+            type="text"
+            id="activity-name"
+            placeholder="例：ONE"
+            maxlength="50"
+            autocomplete="off"
+          >
+        </label>
+        <!-- TikTok ID -->
+        <label class="form-field">
+          <span class="form-label">
+            TikTok ID
+            <small>REQUIRED</small>
+          </span>
+          <div class="tiktok-input">
+            <span>@</span>
+            <input
+              type="text"
+              id="tiktok-id"
+              placeholder="username"
+              maxlength="50"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+            >
+          </div>
+        </label>
+        <!-- ========================================
+             相談したいこと
+        ========================================= -->
+        <fieldset class="form-field consultation-field">
+          <legend class="form-label">
+            相談したいこと
+            <small>REQUIRED</small>
+          </legend>
+          <p class="field-description">
+            当てはまるものをすべて選択してください
+          </p>
+          <!--
+            JavaScriptで
+            4種類の面談に応じて
+            選択肢を自動生成します。
+          -->
+          <div
+            class="consultation-options"
+            id="consultation-options"
+          ></div>
+        </fieldset>
+        <!-- ========================================
+             事前メモ
+        ========================================= -->
+        <label class="form-field">
+          <span class="form-label">
+            事前に伝えておきたいこと
+            <small>OPTIONAL</small>
+          </span>
+          <p class="field-description">
+            面談で詳しく相談したいことや、
+            事前に伝えておきたい内容があればご記入ください
+          </p>
+          <textarea
+            id="pre-message"
+            class="form-textarea"
+            placeholder="例：配信時間や今後の活動方針について相談したいです"
+            maxlength="500"
+            rows="5"
+          ></textarea>
+          <div class="character-count">
+            <span id="pre-message-count">0</span>
+            <span>/ 500</span>
+          </div>
+        </label>
+        <p
+          class="form-error"
+          id="form-error"
+          aria-live="polite"
+        ></p>
+        <button
+          class="primary-button"
+          id="go-confirm"
+          type="button"
+        >
+          <span>予約内容を確認</span>
+          <span>→</span>
+        </button>
+      </div>
+      <button
+        class="back-button"
+        id="back-to-date"
+        type="button"
+      >
+        ← 日付・時間の選択に戻る
+      </button>
+    </section>
+    <!-- ========================================
+         STEP 04
+         予約内容確認
+    ========================================= -->
+    <section
+      class="step"
+      id="step-confirm"
+    >
+      <div class="step-number">
+        04
+      </div>
+      <p class="eyebrow">
+        CONFIRM BOOKING
+      </p>
+      <h2>
+        予約内容の確認
+      </h2>
+      <p class="description">
+        以下の内容でお間違いないかご確認ください
+      </p>
+      <div class="confirm-box">
+        <div class="confirm-row">
+          <span>面談種類</span>
+          <p id="confirm-type">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>面談日</span>
+          <p id="confirm-date">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>面談時間</span>
+          <p id="confirm-time">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>担当者</span>
+          <p id="confirm-staff">―</p>
+        </div>
+        <div class="confirm-divider"></div>
+        <div class="confirm-row">
+          <span>活動名</span>
+          <p id="confirm-name">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>TikTok ID</span>
+          <p id="confirm-tiktok">―</p>
+        </div>
+        <div class="confirm-divider"></div>
+        <!-- 相談内容 -->
+        <div class="confirm-row confirm-row-top">
+          <span>相談内容</span>
+          <p
+            id="confirm-consultation"
+            class="confirm-multiline"
+          >
+            ―
+          </p>
+        </div>
+        <!-- 事前メモ -->
+        <div class="confirm-row confirm-row-top">
+          <span>事前メモ</span>
+          <p
+            id="confirm-pre-message"
+            class="confirm-multiline"
+          >
+            なし
+          </p>
+        </div>
+      </div>
+      <p class="confirm-note">
+        内容をご確認のうえ、予約を確定してください。
+      </p>
+      <p
+        class="form-error"
+        id="booking-error"
+        aria-live="polite"
+      ></p>
+      <button
+        class="primary-button"
+        id="submit-booking"
+        type="button"
+      >
+        <span>この内容で予約する</span>
+        <span>→</span>
+      </button>
+      <button
+        class="back-button"
+        id="back-to-info"
+        type="button"
+      >
+        ← 入力内容を修正する
+      </button>
+    </section>
+    <!-- ========================================
+         予約処理中
+    ========================================= -->
+    <section
+      class="step"
+      id="step-loading"
+    >
+      <div class="booking-loader">
+        <div class="loader-orbit">
+          <span>✦</span>
+        </div>
+        <p class="eyebrow">
+          PROCESSING BOOKING
+        </p>
+        <h2>
+          予約を確定しています
+        </h2>
+        <p class="loading-message">
+          空き状況を最終確認しています
+        </p>
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="loading-note">
+          この画面を閉じずにお待ちください
+        </p>
+      </div>
+    </section>
+    <!-- ========================================
+         STEP 05
+         予約完了
+    ========================================= -->
+    <section
+      class="step"
+      id="step-complete"
+    >
+      <div class="complete-symbol">
+        ✦
+      </div>
+      <div class="step-number">
+        05
+      </div>
+      <p class="eyebrow">
+        BOOKING COMPLETE
+      </p>
+      <h2>
+        面談予約が完了しました
+      </h2>
+      <p class="description complete-description">
+        ご予約ありがとうございます。<br>
+        以下の予約情報を大切に保管してください。
+      </p>
+      <!-- 面談日時 -->
+      <div class="complete-date-area">
+        <p id="complete-date">
+          ―
+        </p>
+        <h3 id="complete-time">
+          ―
+        </h3>
+        <span id="complete-type">
+          ―
+        </span>
+      </div>
+      <!-- 予約番号 -->
+      <div class="booking-code-area">
+        <div class="booking-code-box">
+          <span class="code-label">
+            BOOKING NUMBER
+          </span>
+          <p id="complete-booking-id">
+            ―
+          </p>
+          <button
+            class="copy-button"
+            id="copy-booking-id"
+            type="button"
+          >
+            COPY
+          </button>
+        </div>
+        <!-- キャンセルコード -->
+        <div class="booking-code-box">
+          <span class="code-label">
+            CANCELLATION CODE
+          </span>
+          <p id="complete-cancel-token">
+            ―
+          </p>
+          <button
+            class="copy-button"
+            id="copy-cancel-token"
+            type="button"
+          >
+            COPY
+          </button>
+        </div>
+      </div>
+      <div class="save-notice">
+        <span>
+          ✦
+        </span>
+        <div>
+          <strong>
+            この画面をスクリーンショットしてください
+          </strong>
+          <p>
+            予約番号とキャンセルコードは、
+            予約内容の確認・キャンセル時に必要です。
+          </p>
+        </div>
+      </div>
+      <div class="complete-actions">
+        <button class="primary-button" id="complete-back-to-top" type="button">
+          <span>面談予約トップへ戻る</span><span>→</span>
+        </button>
+        <button
+          class="cancel-link-button"
+          id="open-cancel"
+          type="button"
+        >
+          予約をキャンセルする
+        </button>
+      </div>
+      <p class="complete-brand">
+        ONE
+        <span>
+          LIVE STREAMER AGENCY
+        </span>
+      </p>
+    </section>
+    <!-- ========================================
+         STEP 06
+         予約確認・キャンセル
+    ========================================= -->
+    <section
+      class="step"
+      id="step-cancel"
+    >
+      <div class="step-number">
+        06
+      </div>
+      <p class="eyebrow">
+        CANCEL BOOKING
+      </p>
+      <h2>
+        予約の確認・キャンセル
+      </h2>
+      <p class="description">
+        予約番号とキャンセルコードを入力してください
+      </p>
+      <div class="form-area">
+        <label class="form-field">
+          <span class="form-label">
+            予約番号
+            <small>REQUIRED</small>
+          </span>
+          <input
+            type="text"
+            id="cancel-booking-id"
+            placeholder="ONE-XXXXXXXX"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+          >
+        </label>
+        <label class="form-field">
+          <span class="form-label">
+            キャンセルコード
+            <small>REQUIRED</small>
+          </span>
+          <input
+            type="text"
+            id="cancel-token"
+            placeholder="XXXXXXXX"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+          >
+        </label>
+        <p
+          class="form-error"
+          id="cancel-error"
+          aria-live="polite"
+        ></p>
+        <button
+          class="danger-button"
+          id="cancel-submit"
+          type="button"
+        >
+          <span>予約内容を確認する</span>
+          <span>→</span>
+        </button>
+      </div>
+      <button
+        class="back-button"
+        id="back-from-cancel"
+        type="button"
+      >
+        ← 戻る
+      </button>
+    </section>
+    <!-- ========================================
+         STEP 07
+         キャンセル内容確認
+    ========================================= -->
+    <section
+      class="step"
+      id="step-cancel-confirm"
+    >
+      <div class="step-number">
+        07
+      </div>
+      <p class="eyebrow">
+        CANCEL CONFIRMATION
+      </p>
+      <h2>
+        キャンセル内容の確認
+      </h2>
+      <p class="description">
+        予約内容をご確認ください。キャンセルをご希望の場合は下のボタンを押してください
+      </p>
+      <div class="cancel-confirm-symbol">
+        ✦
+      </div>
+      <div class="confirm-box">
+        <div class="confirm-row">
+          <span>予約番号</span>
+          <p id="cancel-confirm-id">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>面談日</span>
+          <p id="cancel-confirm-date">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>面談時間</span>
+          <p id="cancel-confirm-time">―</p>
+        </div>
+        <div class="confirm-row">
+          <span>面談種類</span>
+          <p id="cancel-confirm-type">―</p>
+        </div>
+      </div>
+      <div class="confirm-box"><div class="confirm-row"><span>活動名</span><p id="manage-name"></p></div><div class="confirm-row"><span>TikTok ID</span><p id="manage-tiktok"></p></div><div class="confirm-row"><span>担当者</span><p id="manage-staff"></p></div><div class="confirm-row confirm-row-top"><span>相談内容</span><p class="confirm-multiline" id="manage-topics"></p></div><div class="confirm-row confirm-row-top"><span>事前メモ</span><p class="confirm-multiline" id="manage-message"></p></div></div>
+      <div class="cancel-warning">
+        <span>
+          ✦
+        </span>
+        <div>
+          <strong>
+            キャンセル後は元に戻せません
+          </strong>
+          <p>
+            再度面談をご希望の場合は、
+            新しく予約をお取りください。
+          </p>
+        </div>
+      </div>
+      <p
+        class="form-error"
+        id="cancel-confirm-error"
+        aria-live="polite"
+      ></p>
+      <button
+        class="danger-button"
+        id="cancel-confirm-submit"
+        type="button"
+      >
+        <span>キャンセルを確定する</span>
+        <span>→</span>
+      </button>
+      <button
+        class="back-button"
+        id="back-to-cancel"
+        type="button"
+      >
+        ← 戻る
+      </button>
+    </section>
+    <!-- ========================================
+         キャンセル処理中
+    ========================================= -->
+    <section
+      class="step"
+      id="step-cancel-loading"
+    >
+      <div class="booking-loader">
+        <div class="loader-orbit">
+          <span>✦</span>
+        </div>
+        <p class="eyebrow">
+          PROCESSING CANCELLATION
+        </p>
+        <h2>
+          キャンセルしています
+        </h2>
+        <p class="loading-message">
+          予約情報を更新しています
+        </p>
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="loading-note">
+          この画面を閉じずにお待ちください
+        </p>
+      </div>
+    </section>
+    <!-- ========================================
+         STEP 08
+         キャンセル完了
+    ========================================= -->
+    <section
+      class="step"
+      id="step-cancel-complete"
+    >
+      <div class="cancel-complete-symbol">
+        ✦
+      </div>
+      <div class="step-number">
+        08
+      </div>
+      <p class="eyebrow">
+        CANCELLATION COMPLETE
+      </p>
+      <h2>
+        予約をキャンセルしました
+      </h2>
+      <p class="description complete-description">
+        キャンセル手続きが完了しました。<br>
+        ご確認ありがとうございました。
+      </p>
+      <div class="cancel-complete-box">
+        <span>
+          CANCELLED
+        </span>
+        <p id="cancel-complete-id">
+          ―
+        </p>
+      </div>
+      <p class="cancel-complete-note">
+        再度面談をご希望の場合は、<br>
+        新しく面談予約をお取りください。
+      </p>
+      <button
+        class="primary-button"
+        id="back-to-top"
+        type="button"
+      >
+        <span>面談予約トップへ</span>
+        <span>→</span>
+      </button>
+      <p class="complete-brand">
+        ONE
+        <span>
+          LIVE STREAMER AGENCY
+        </span>
+      </p>
+    </section>
+  </main>
+  <!-- ========================================
+       背景装飾
+  ========================================= -->
+  <div
+    class="background-decoration"
+    aria-hidden="true"
+  >
+    <span class="glow glow-one"></span>
+    <span class="glow glow-two"></span>
+    <span class="bg-star star-one">
+      ✦
+    </span>
+    <span class="bg-star star-two">
+      ✧
+    </span>
+    <span class="orbit orbit-one"></span>
+    <span class="orbit orbit-two"></span>
+  </div>
+  <!--
+    ?v=4 を付けて
+    古いJavaScriptのキャッシュを避けます。
+  -->
+  <script src="script.js?v=4"></script>
+</body>
+</html>

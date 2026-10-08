@@ -1,0 +1,1903 @@
+/* =========================================
+   ONE 面談予約システム
+   style.css
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --black: #090908;
+  --black-soft: #11110f;
+  --gold: #d6bd7b;
+  --gold-light: #f0dfae;
+  --gold-dark: #8f7743;
+  --white: #f7f4ec;
+  --gray: #aaa69d;
+  --danger: #d8a7a0;
+  --border:
+    rgba(214, 189, 123, 0.22);
+  --border-soft:
+    rgba(214, 189, 123, 0.12);
+}
+/* =========================================
+   BASE
+========================================= */
+html {
+  scroll-behavior: smooth;
+  background: var(--black);
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--white);
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(214, 189, 123, 0.10),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #0c0c0b 0%,
+      #070706 100%
+    );
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  overflow-x: hidden;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  -webkit-tap-highlight-color:
+    transparent;
+}
+input,
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+/* =========================================
+   MAIN
+========================================= */
+.booking {
+  position: relative;
+  z-index: 2;
+  width:
+    min(
+      calc(100% - 36px),
+      680px
+    );
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding:
+    70px
+    0
+    80px;
+}
+/* =========================================
+   BRAND
+========================================= */
+.brand {
+  text-align: center;
+  margin-bottom: 75px;
+}
+.brand-mark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.brand h1 {
+  color: var(--gold-light);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size:
+    clamp(
+      3.3rem,
+      11vw,
+      5rem
+    );
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  margin-right: -0.18em;
+  text-shadow:
+    0 0 25px
+    rgba(214, 189, 123, 0.10);
+}
+.star {
+  color: var(--gold);
+  font-size: 0.8rem;
+}
+.brand-sub {
+  margin-top: 14px;
+  padding-left: 0.42em;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.42em;
+}
+/* =========================================
+   STEP
+========================================= */
+.step {
+  display: none;
+  animation:
+    fadeIn
+    0.45s
+    ease;
+}
+.step.active {
+  display: block;
+}
+.step-number {
+  margin-bottom: 20px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+}
+.eyebrow {
+  margin-bottom: 13px;
+  color: var(--gold);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 0.67rem;
+  letter-spacing: 0.3em;
+}
+.step h2 {
+  color: var(--white);
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+  font-size:
+    clamp(
+      1.8rem,
+      7vw,
+      2.7rem
+    );
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+}
+.description {
+  margin-top: 14px;
+  margin-bottom: 40px;
+  color: var(--gray);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+/* =========================================
+   STEP01
+   面談種類
+========================================= */
+.type-list {
+  display: grid;
+  gap: 15px;
+}
+.type-card {
+  position: relative;
+  width: 100%;
+  min-height: 145px;
+  padding: 25px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  color: var(--white);
+  background:
+    linear-gradient(
+      120deg,
+      rgba(214, 189, 123, 0.055),
+      rgba(255, 255, 255, 0.015)
+    );
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+.type-card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 28px;
+  width: 45px;
+  height: 1px;
+  background: var(--gold);
+}
+.card-number {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+}
+.type-card h3 {
+  margin-bottom: 9px;
+  color: var(--gold-light);
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+.type-card p {
+  color: var(--gray);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+}
+.arrow {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 1.3rem;
+  transition:
+    transform
+    0.3s
+    ease;
+}
+/* =========================================
+   予約済み
+========================================= */
+.already-booked {
+  margin-top: 55px;
+}
+.already-booked-line {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 22px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(214, 189, 123, 0.25),
+      transparent
+    );
+}
+.already-booked-label {
+  margin-bottom: 13px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+}
+.already-booked-button {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  color: var(--white);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.already-booked-title {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--gold-light);
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+}
+.already-booked-description {
+  display: block;
+  color: var(--gray);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+}
+.already-booked-arrow {
+  color: var(--gold);
+  font-family:
+    Georgia,
+    serif;
+  transition:
+    transform
+    0.25s
+    ease;
+}
+/* =========================================
+   STEP02
+   選択した面談
+========================================= */
+.selected-type-text {
+  display: inline-block;
+  margin-top: 18px;
+  padding-bottom: 5px;
+  color: var(--gold);
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.35);
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+}
+/* =========================================
+   CALENDAR
+========================================= */
+.calendar {
+  width: 100%;
+  padding: 25px;
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.2);
+  background:
+    rgba(255, 255, 255, 0.015);
+}
+.calendar-header {
+  display: grid;
+  grid-template-columns:
+    44px
+    1fr
+    44px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.calendar-header h3 {
+  text-align: center;
+  color: var(--gold-light);
+  font-family:
+    Georgia,
+    "Yu Mincho",
+    serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+.calendar-header button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  background: transparent;
+  border:
+    1px solid
+    transparent;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+.weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+}
+.weekdays {
+  margin-bottom: 10px;
+}
+.weekdays span {
+  text-align: center;
+  color: #77736b;
+  font-size: 0.65rem;
+}
+.calendar-day {
+  width:
+    calc(100% - 6px);
+  aspect-ratio: 1;
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #55524c;
+  background: transparent;
+  border:
+    1px solid
+    transparent;
+  border-radius: 1px;
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.78rem;
+}
+button.calendar-day {
+  padding: 0;
+}
+.calendar-day.available {
+  color: var(--gold-light);
+  border-color:
+    rgba(214, 189, 123, 0.25);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+.calendar-day.selected {
+  color: #090908;
+  background:
+    var(--gold-light);
+  border-color:
+    var(--gold-light);
+}
+.calendar-day.empty {
+  pointer-events: none;
+}
+/* =========================================
+   CALENDAR LOADING
+========================================= */
+.calendar-loading {
+  min-height: 48px;
+  margin:
+    18px
+    0
+    4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calendar-loading.loaded
+.mini-loader {
+  display: none;
+}
+.mini-loader {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.25);
+  border-top-color:
+    var(--gold);
+  border-radius: 50%;
+  animation:
+    miniSpin
+    0.8s
+    linear
+    infinite;
+}
+.calendar-message {
+  color: var(--gray);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+/* =========================================
+   TIME SLOTS
+========================================= */
+.slot-area {
+  display: none;
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+.slot-area.visible {
+  display: block;
+}
+#slot-date {
+  margin-bottom: 15px;
+  color: var(--gold-light);
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+.time-slots {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+.time-slot {
+  min-height: 48px;
+  padding: 13px 5px;
+  color: var(--gold-light);
+  background:
+    rgba(214, 189, 123, 0.035);
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.25);
+  border-radius: 1px;
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+/* =========================================
+   STEP03
+   SUMMARY
+========================================= */
+.booking-summary-mini {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  margin-bottom: 40px;
+  border-top:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+}
+.booking-summary-mini > div {
+  min-width: 0;
+  padding: 18px 15px;
+}
+.booking-summary-mini > div + div {
+  border-left:
+    1px solid
+    rgba(214, 189, 123, 0.15);
+}
+.booking-summary-mini span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+}
+.booking-summary-mini p {
+  color: var(--gold-light);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+/* =========================================
+   FORM
+========================================= */
+.form-area {
+  margin-bottom: 25px;
+}
+.form-field {
+  display: block;
+  min-width: 0;
+  margin-bottom: 30px;
+  border: none;
+}
+.form-label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--white);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+.form-label small {
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.12em;
+}
+.field-description {
+  margin:
+    -2px
+    0
+    15px;
+  color: #77736b;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+/* =========================================
+   INPUT
+========================================= */
+.form-field input {
+  width: 100%;
+  padding:
+    15px
+    3px;
+  color: var(--white);
+  background: transparent;
+  border: none;
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.28);
+  border-radius: 0;
+  outline: none;
+  font-size: 0.9rem;
+  transition:
+    border-color
+    0.2s
+    ease;
+}
+.form-field input:focus {
+  border-bottom-color:
+    var(--gold);
+}
+.form-field input::placeholder,
+.form-textarea::placeholder {
+  color: #5f5c55;
+}
+/* =========================================
+   TIKTOK
+========================================= */
+.tiktok-input {
+  display: flex;
+  align-items: center;
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.28);
+  transition:
+    border-color
+    0.2s
+    ease;
+}
+.tiktok-input:focus-within {
+  border-bottom-color:
+    var(--gold);
+}
+.tiktok-input > span {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-family:
+    Georgia,
+    serif;
+}
+.tiktok-input input {
+  min-width: 0;
+  border-bottom: none;
+  padding-left: 8px;
+}
+.tiktok-input input:focus {
+  border-bottom: none;
+}
+/* =========================================
+   CONSULTATION
+========================================= */
+.consultation-field {
+  margin-top: 4px;
+}
+.consultation-options {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.consultation-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color:
+    transparent;
+}
+.consultation-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.consultation-option-content {
+  min-height: 56px;
+  padding:
+    14px
+    15px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--gray);
+  background:
+    rgba(255, 255, 255, 0.012);
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.18);
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.consultation-check {
+  width: 16px;
+  height: 16px;
+  flex:
+    0
+    0
+    16px;
+  position: relative;
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.38);
+}
+.consultation-check::after {
+  content: "✦";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #090908;
+  background:
+    var(--gold-light);
+  font-size: 0.55rem;
+  opacity: 0;
+  transform:
+    scale(0.6);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+.consultation-option-text {
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+}
+.consultation-option
+input:checked
++
+.consultation-option-content {
+  color: var(--gold-light);
+  background:
+    rgba(214, 189, 123, 0.07);
+  border-color:
+    rgba(214, 189, 123, 0.55);
+}
+.consultation-option
+input:checked
++
+.consultation-option-content
+.consultation-check::after {
+  opacity: 1;
+  transform:
+    scale(1);
+}
+.consultation-option
+input:focus-visible
++
+.consultation-option-content {
+  outline:
+    1px solid
+    var(--gold);
+  outline-offset: 2px;
+}
+/* =========================================
+   TEXTAREA
+========================================= */
+.form-textarea {
+  display: block;
+  width: 100%;
+  min-height: 130px;
+  padding:
+    15px
+    16px;
+  resize: vertical;
+  color: var(--white);
+  background:
+    rgba(255, 255, 255, 0.012);
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+  border-radius: 1px;
+  outline: none;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  transition:
+    border-color
+    0.2s
+    ease;
+}
+.form-textarea:focus {
+  border-color:
+    rgba(214, 189, 123, 0.65);
+}
+.character-count {
+  margin-top: 7px;
+  display: flex;
+  justify-content: flex-end;
+  color: #66625b;
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+/* =========================================
+   ERROR
+========================================= */
+.form-error {
+  min-height: 20px;
+  margin-bottom: 12px;
+  color: var(--danger);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+/* =========================================
+   PRIMARY BUTTON
+========================================= */
+.primary-button {
+  width: 100%;
+  min-height: 58px;
+  padding:
+    18px
+    20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: #090908;
+  background:
+    linear-gradient(
+      110deg,
+      var(--gold),
+      var(--gold-light)
+    );
+  border:
+    1px solid
+    var(--gold-light);
+  border-radius: 1px;
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+/* =========================================
+   BACK BUTTON
+========================================= */
+.back-button {
+  min-height: 44px;
+  margin-top: 14px;
+  padding:
+    10px
+    0;
+  color: var(--gray);
+  background: none;
+  border: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition:
+    color
+    0.2s
+    ease;
+}
+/* =========================================
+   CONFIRM
+========================================= */
+.confirm-box {
+  margin-bottom: 25px;
+  padding:
+    8px
+    28px;
+  background:
+    linear-gradient(
+      120deg,
+      rgba(214, 189, 123, 0.055),
+      rgba(255, 255, 255, 0.012)
+    );
+  border-top:
+    1px solid
+    rgba(214, 189, 123, 0.3);
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.3);
+}
+.confirm-row {
+  min-height: 65px;
+  display: grid;
+  grid-template-columns:
+    120px
+    minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.09);
+}
+.confirm-row:last-child {
+  border-bottom: none;
+}
+.confirm-row > span {
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    "Yu Mincho",
+    serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+.confirm-row p {
+  min-width: 0;
+  color: var(--gold-light);
+  font-size: 0.84rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.confirm-divider {
+  height: 1px;
+  margin:
+    7px
+    0;
+  background:
+    rgba(214, 189, 123, 0.2);
+}
+.confirm-row-top {
+  align-items: start;
+  padding:
+    20px
+    0;
+}
+.confirm-multiline {
+  white-space: pre-wrap;
+}
+.confirm-note {
+  margin:
+    18px
+    0
+    22px;
+  color: var(--gray);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+}
+/* =========================================
+   LOADING
+========================================= */
+#step-loading,
+#step-cancel-loading {
+  text-align: center;
+}
+.booking-loader {
+  padding-top: 45px;
+}
+.loader-orbit {
+  width: 88px;
+  height: 88px;
+  margin:
+    0
+    auto
+    35px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+  border-radius: 50%;
+  animation:
+    orbitRotate
+    3s
+    linear
+    infinite;
+}
+.loader-orbit::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background:
+    var(--gold-light);
+  box-shadow:
+    0 0 14px
+    rgba(240, 223, 174, 0.5);
+}
+.loader-orbit span {
+  color: var(--gold);
+  font-size: 1rem;
+}
+.loading-message {
+  margin-top: 24px;
+  color: var(--gold-light);
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.loading-dots {
+  height: 20px;
+  margin:
+    17px
+    0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.loading-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background:
+    var(--gold);
+  animation:
+    loadingDot
+    1.2s
+    infinite
+    ease-in-out;
+}
+.loading-dots span:nth-child(2) {
+  animation-delay:
+    0.15s;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay:
+    0.3s;
+}
+.loading-note {
+  color: #66625b;
+  font-size: 0.67rem;
+  letter-spacing: 0.06em;
+}
+/* =========================================
+   COMPLETE
+========================================= */
+.complete-symbol,
+.cancel-complete-symbol,
+.cancel-confirm-symbol {
+  margin-bottom: 28px;
+  color: var(--gold);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 1.3rem;
+}
+.complete-date-area {
+  margin:
+    5px
+    0
+    38px;
+  padding:
+    28px
+    20px;
+  text-align: center;
+  border-top:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+}
+.complete-date-area p {
+  margin-bottom: 10px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+}
+.complete-date-area h3 {
+  margin-bottom: 12px;
+  color: var(--gold-light);
+  font-family:
+    Georgia,
+    "Yu Mincho",
+    serif;
+  font-size:
+    clamp(
+      1.35rem,
+      5vw,
+      1.8rem
+    );
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+.complete-date-area > span {
+  color: var(--gray);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+/* =========================================
+   BOOKING CODE
+========================================= */
+.booking-code-area {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.booking-code-box {
+  min-width: 0;
+  padding:
+    20px
+    17px;
+  position: relative;
+  background:
+    rgba(214, 189, 123, 0.035);
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.2);
+}
+.code-label {
+  display: block;
+  margin-bottom: 11px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.17em;
+}
+.booking-code-box p {
+  padding-right: 45px;
+  color: var(--gold-light);
+  font-family:
+    Georgia,
+    monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.copy-button {
+  position: absolute;
+  right: 12px;
+  bottom: 15px;
+  padding:
+    5px
+    6px;
+  color: var(--gold);
+  background: transparent;
+  border: none;
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.53rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+/* =========================================
+   SAVE NOTICE
+========================================= */
+.save-notice,
+.cancel-warning {
+  margin:
+    22px
+    0;
+  padding:
+    18px
+    20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background:
+    rgba(214, 189, 123, 0.035);
+  border-left:
+    1px solid
+    var(--gold-dark);
+}
+.save-notice > span,
+.cancel-warning > span {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 0.7rem;
+  margin-top: 2px;
+}
+.save-notice strong,
+.cancel-warning strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--gold-light);
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+.save-notice p,
+.cancel-warning p {
+  color: var(--gray);
+  font-size: 0.68rem;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+/* =========================================
+   COMPLETE ACTION
+========================================= */
+.complete-actions {
+  margin-top: 25px;
+  text-align: center;
+}
+.cancel-link-button {
+  padding:
+    10px
+    5px;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  border-bottom:
+    1px solid
+    rgba(170, 166, 157, 0.3);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.complete-brand {
+  margin-top: 55px;
+  text-align: center;
+  color: var(--gold-light);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+}
+.complete-brand span {
+  display: block;
+  margin-top: 7px;
+  color: var(--gold-dark);
+  font-size: 0.46rem;
+  letter-spacing: 0.22em;
+}
+/* =========================================
+   DANGER BUTTON
+========================================= */
+.danger-button {
+  width: 100%;
+  min-height: 58px;
+  padding:
+    18px
+    20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--white);
+  background:
+    rgba(160, 90, 80, 0.09);
+  border:
+    1px solid
+    rgba(216, 167, 160, 0.4);
+  border-radius: 1px;
+  font-family:
+    "Yu Mincho",
+    serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.danger-button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+/* =========================================
+   CANCEL COMPLETE
+========================================= */
+.cancel-complete-box {
+  margin:
+    30px
+    0;
+  padding:
+    24px
+    20px;
+  text-align: center;
+  border-top:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+  border-bottom:
+    1px solid
+    rgba(214, 189, 123, 0.22);
+}
+.cancel-complete-box span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--gold-dark);
+  font-family:
+    Georgia,
+    serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+}
+.cancel-complete-box p {
+  color: var(--gold-light);
+  font-family:
+    Georgia,
+    monospace;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+.cancel-complete-note {
+  margin-bottom: 28px;
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.72rem;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+/* =========================================
+   BACKGROUND
+========================================= */
+.background-decoration {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glow {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter:
+    blur(100px);
+  background:
+    rgba(180, 146, 73, 0.055);
+}
+.glow-one {
+  top: -180px;
+  right: -180px;
+}
+.glow-two {
+  bottom: -220px;
+  left: -190px;
+}
+.bg-star {
+  position: absolute;
+  color:
+    rgba(214, 189, 123, 0.35);
+  font-family:
+    Georgia,
+    serif;
+}
+.star-one {
+  top: 18%;
+  right: 8%;
+  font-size: 0.8rem;
+}
+.star-two {
+  bottom: 13%;
+  left: 7%;
+  font-size: 0.65rem;
+}
+.orbit {
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border:
+    1px solid
+    rgba(214, 189, 123, 0.055);
+  border-radius: 50%;
+}
+.orbit-one {
+  top: -290px;
+  left: -120px;
+}
+.orbit-two {
+  right: -300px;
+  bottom: -100px;
+}
+/* =========================================
+   HOVER
+   マウス操作できる端末だけ
+========================================= */
+@media (hover: hover) and (pointer: fine) {
+  .type-card:hover {
+    transform:
+      translateY(-3px);
+    border-color:
+      rgba(214, 189, 123, 0.65);
+    background:
+      linear-gradient(
+        120deg,
+        rgba(214, 189, 123, 0.10),
+        rgba(255, 255, 255, 0.025)
+      );
+  }
+  .type-card:hover
+  .arrow {
+    transform:
+      translateX(5px);
+  }
+  .already-booked-button:hover
+  .already-booked-arrow {
+    transform:
+      translateX(4px);
+  }
+  .calendar-header
+  button:hover {
+    border-color:
+      rgba(214, 189, 123, 0.25);
+    background:
+      rgba(214, 189, 123, 0.05);
+  }
+  .calendar-day.available:hover {
+    color: #090908;
+    background:
+      var(--gold-light);
+  }
+  .time-slot:hover {
+    color: #090908;
+    background:
+      var(--gold-light);
+    transform:
+      translateY(-1px);
+  }
+  .consultation-option:hover
+  .consultation-option-content {
+    border-color:
+      rgba(214, 189, 123, 0.42);
+  }
+  .primary-button:hover {
+    transform:
+      translateY(-2px);
+  }
+  .back-button:hover,
+  .cancel-link-button:hover {
+    color:
+      var(--gold-light);
+  }
+  .danger-button:hover {
+    background:
+      rgba(160, 90, 80, 0.16);
+    border-color:
+      rgba(216, 167, 160, 0.65);
+    transform:
+      translateY(-1px);
+  }
+}
+/* =========================================
+   ACTIVE
+========================================= */
+.primary-button:active,
+.danger-button:active,
+.time-slot:active,
+.type-card:active {
+  transform:
+    translateY(0);
+}
+/* =========================================
+   ANIMATION
+========================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform:
+      translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+@keyframes miniSpin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+@keyframes orbitRotate {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+@keyframes loadingDot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform:
+      translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform:
+      translateY(-4px);
+  }
+}
+/* =========================================
+   TABLET / SMALL PC
+========================================= */
+@media (max-width: 720px) {
+  .booking {
+    width:
+      min(
+        calc(100% - 32px),
+        680px
+      );
+    padding:
+      54px
+      0
+      65px;
+  }
+  .brand {
+    margin-bottom: 62px;
+  }
+  .confirm-box {
+    padding:
+      8px
+      22px;
+  }
+}
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 600px) {
+  .booking {
+    width:
+      calc(100% - 30px);
+    padding:
+      45px
+      0
+      55px;
+  }
+  .brand {
+    margin-bottom: 55px;
+  }
+  .brand-mark {
+    gap: 11px;
+  }
+  .brand h1 {
+    font-size:
+      clamp(
+        3rem,
+        17vw,
+        4rem
+      );
+  }
+  .brand-sub {
+    font-size: 0.54rem;
+    letter-spacing: 0.32em;
+    padding-left: 0.32em;
+  }
+  .step h2 {
+    font-size:
+      clamp(
+        1.65rem,
+        8vw,
+        2.15rem
+      );
+  }
+  .description {
+    margin-bottom: 32px;
+    font-size: 0.8rem;
+  }
+  /* TYPE */
+  .type-card {
+    min-height: 130px;
+    padding:
+      22px
+      20px;
+  }
+  .type-card::before {
+    left: 20px;
+  }
+  .type-card h3 {
+    font-size: 1.12rem;
+  }
+  .type-card p {
+    font-size: 0.7rem;
+  }
+  /* CALENDAR */
+  .calendar {
+    padding:
+      20px
+      11px;
+  }
+  .calendar-header {
+    grid-template-columns:
+      40px
+      1fr
+      40px;
+    margin-bottom: 20px;
+  }
+  .calendar-header button {
+    width: 40px;
+    height: 40px;
+  }
+  .calendar-day {
+    width:
+      calc(100% - 4px);
+    margin: 2px;
+    font-size: 0.74rem;
+  }
+  .time-slots {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .time-slot {
+    min-height: 48px;
+    font-size: 0.75rem;
+  }
+  /* SUMMARY */
+  .booking-summary-mini {
+    grid-template-columns: 1fr;
+    margin-bottom: 34px;
+  }
+  .booking-summary-mini > div {
+    padding:
+      13px
+      5px;
+  }
+  .booking-summary-mini
+  > div
+  + div {
+    border-left: none;
+    border-top:
+      1px solid
+      rgba(214, 189, 123, 0.12);
+  }
+  /* CONSULTATION */
+  .consultation-options {
+    grid-template-columns: 1fr;
+  }
+  .consultation-option-content {
+    min-height: 54px;
+    padding:
+      13px
+      14px;
+  }
+  /* CONFIRM */
+  .confirm-box {
+    padding:
+      7px
+      17px;
+  }
+  .confirm-row {
+    grid-template-columns:
+      95px
+      minmax(0, 1fr);
+    gap: 12px;
+    min-height: 61px;
+  }
+  .confirm-row > span {
+    font-size: 0.61rem;
+  }
+  .confirm-row p {
+    font-size: 0.79rem;
+  }
+  .confirm-row-top {
+    padding:
+      18px
+      0;
+  }
+  /* COMPLETE */
+  .booking-code-area {
+    grid-template-columns: 1fr;
+  }
+  .booking-code-box {
+    padding:
+      19px
+      17px;
+  }
+  .booking-code-box p {
+    font-size: 0.82rem;
+  }
+  .save-notice,
+  .cancel-warning {
+    padding:
+      16px
+      16px;
+  }
+  .already-booked {
+    margin-top: 42px;
+  }
+}
+/* =========================================
+   SMALL MOBILE
+========================================= */
+@media (max-width: 430px) {
+  .booking {
+    width:
+      calc(100% - 24px);
+    padding-top: 38px;
+  }
+  .brand {
+    margin-bottom: 48px;
+  }
+  .brand h1 {
+    font-size:
+      clamp(
+        2.8rem,
+        18vw,
+        3.6rem
+      );
+  }
+  .brand-sub {
+    font-size: 0.48rem;
+    letter-spacing: 0.25em;
+    padding-left: 0.25em;
+  }
+  .eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.24em;
+  }
+  .step-number {
+    font-size: 0.64rem;
+  }
+  .type-card {
+    min-height: 122px;
+    padding:
+      20px
+      17px;
+    gap: 12px;
+  }
+  .type-card::before {
+    left: 17px;
+  }
+  .arrow {
+    margin-left: 5px;
+  }
+  .calendar {
+    padding:
+      18px
+      7px;
+  }
+  .weekdays span {
+    font-size: 0.58rem;
+  }
+  .calendar-day {
+    font-size: 0.7rem;
+  }
+  .time-slot {
+    padding:
+      12px
+      3px;
+    font-size: 0.7rem;
+  }
+  .form-field {
+    margin-bottom: 27px;
+  }
+  .field-description {
+    font-size: 0.67rem;
+  }
+  .form-textarea {
+    min-height: 120px;
+    padding:
+      13px
+      14px;
+  }
+  .confirm-box {
+    padding:
+      6px
+      14px;
+  }
+  .confirm-row {
+    grid-template-columns:
+      82px
+      minmax(0, 1fr);
+    gap: 10px;
+  }
+  .confirm-row > span {
+    font-size: 0.57rem;
+  }
+  .confirm-row p {
+    font-size: 0.75rem;
+  }
+  .primary-button,
+  .danger-button {
+    min-height: 56px;
+    padding:
+      17px
+      16px;
+    font-size: 0.78rem;
+  }
+  .complete-date-area {
+    padding:
+      25px
+      12px;
+  }
+  .save-notice,
+  .cancel-warning {
+    gap: 11px;
+    padding:
+      15px
+      13px;
+  }
+}
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+@media (max-width: 350px) {
+  .booking {
+    width:
+      calc(100% - 18px);
+  }
+  .calendar {
+    padding:
+      16px
+      4px;
+  }
+  .calendar-day {
+    font-size: 0.66rem;
+  }
+  .time-slots {
+    grid-template-columns: 1fr;
+  }
+  .confirm-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding:
+      13px
+      0;
+  }
+  .confirm-row-top {
+    padding:
+      15px
+      0;
+  }
+}
+/* =========================================
+   REDUCED MOTION
+========================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration:
+      0.01ms !important;
+    animation-iteration-count:
+      1 !important;
+    transition-duration:
+      0.01ms !important;
+  }
+}
+/* 4種類の面談 / キーボード操作 */
+.type-card h3 small { font-size: .65em; color: var(--gold); white-space: nowrap; }
+button:focus-visible,input:focus-visible,textarea:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
